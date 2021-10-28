@@ -1,46 +1,52 @@
-# Getting Started with Create React App
+# Getting Started 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Create Dockerfile with node image
+FROM node:16-alpine
 
-## Available Scripts
+## Build the image from the Dockerfile
+docker build -t bb-image .
 
-In the project directory, you can run:
+## Spin up container based on image
+### -d flag runs the container in the background (detached mode)
+docker run -d --name bb-client bb-image
 
-### `yarn start`
+## Port forwarding
+**docker run -d -p localport:containerport --name containername imagename**
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+docker run -d -p 3000:3000 --name bb-client bb-image
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+<!-- ## Use docker compose
+docker-compose up -->
 
-### `yarn test`
+## Browser
+open localhost:3000 in browser window
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Create volume
+### mounts local directory to container's working directory to apply changes without restarting
+**docker run -v {localdirectory:containerdirectory} -d -p localport:containerport --name bb-client bb-image**
 
-### `yarn build`
+docker run -v $(pwd)/src:/app/src -d -p 3000:3000 --name bb-client bb-image
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### add `:ro` flag to make volume read only - container cannot make changes to local directory
+docker run -v $(pwd)/src:/app/src:ro -d -p 3000:3000 --name bb-client bb-image
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Environment Variables
+1. Dockerfile ENV {VARIABLENAME}={variableValue}
+2. Rebuild image
+3. run container
 
-### `yarn eject`
+### overrides
+docker run -e {VARIABLENAME}={variableValue} -v $(pwd)/src:/app/src -d -p 3000:3000 --name bb-client bb-image
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### .env file
+1. touch .env
+2. paste env variables
+3. docker run --env-file ./.env -v $(pwd)/src:/app/src:ro -d -p 3000:3000 --name bb-client bb-image
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Docker Compose
+docker-compose up -d
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+### to rebuild stale image
+docker-compse up -d --build
