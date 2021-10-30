@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from "react-router-dom";
-import logo from './logo.svg';
+import logo from '../logo.svg';
 
 interface Props {
   
@@ -22,7 +22,7 @@ const Home: React.FC<Props> = () => {
             <p>
                 Or <a className="App-link" onClick={onClick}>Create an Account</a> to get started...
             </p>
-            <p>{`hello ${process.env.REACT_APP_NAME}, current environment=${process.env.REACT_APP_ENV}`}</p>
+            <p>{`hello ${process.env.REACT_APP_NAME}, current environment=${process.env.REACT_APP_ENV} test`}</p>
         </div>
     )
 }

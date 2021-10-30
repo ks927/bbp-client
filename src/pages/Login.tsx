@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import '../assets/App.css';
 import { useState } from 'react/cjs/react.development';
 
 interface Props {

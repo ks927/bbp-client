@@ -1,10 +1,11 @@
 version: "3"
 services: 
   bb-client:
-    build: .
-    ports:
-      - "3000:3000"
-    volumes:
-      - ./src:/app/src
-    env_file:
-      - ./.env
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile.dev
+    environment:
+      - REACT_APP_NAME=Kyle
+
+    # env_file:
+    #   - ./.env

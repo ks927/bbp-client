@@ -1,7 +1,7 @@
 import React from 'react';
-import './App.css';
+import '../assets/App.css';
 import { useState } from 'react/cjs/react.development';
-import { IMeal } from './_types/IMeal';
+import { IMeal } from '../_types/IMeal';
 
 interface Props {
   

@@ -1,6 +1,5 @@
 import React from 'react';
-import './App.css';
-import { useState } from 'react/cjs/react.development';
+import '../assets/App.css';
 import { Link } from 'react-router-dom';
 
 interface Props {
@@ -8,13 +7,14 @@ interface Props {
 }
 
 const Nav: React.FC<Props> = () => {
-  const [name, setName] = useState('');
-
   return (
     <div>
         <ul className="nav">
+            <Link to="/">
+                <li className="nav-items">Home</li>
+            </Link>
             <Link to="/menu">
-                <li className="nav-items">Meals</li>
+                <li className="nav-items">Menu</li>
             </Link>
             <Link to="/about">
                 <li className="nav-items">About</li>
