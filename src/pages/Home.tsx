@@ -12,6 +12,7 @@ const Home: React.FC<Props> = () => {
     const onClick = () => {
       history.push("/login");
     }
+    
     return (
         <div>
             <img src={logo} className="App-logo" alt="logo" />

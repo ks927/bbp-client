@@ -1,7 +1,7 @@
 export const MexicanBeef: object = {
     id: 1,
     name: 'Mexican Beef',
-    ingredients: ['mexcian beef', 'brown rice', 'peppers', 'black beans'],
+    ingredients: ['mexican beef', 'brown rice', 'peppers', 'black beans'],
     ethnicity: 'Mexican',
     protein: ['beef', 'black beans'],
     carb: ['brown rice']
